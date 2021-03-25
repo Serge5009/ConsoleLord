@@ -76,13 +76,14 @@ private:
 	int freePop;
 	int requiredPop;
 		int CalculateFreePop();
-
+		 
 		void AssignEnviromentStats();
 		void AssignClimateStats();
 	
+		char name[32] = "Cornwall";
 
 public:
-	//string name;
+	
 	short ID;
 	short GlobalID;
 	short type;

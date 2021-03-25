@@ -7,12 +7,13 @@
 class Game
 {
 private:
-	bool isRunning;
+	bool isRunning;	//	Controls Game loop
 	bool isPlaying;	//	If false - freezes updates
-	float deltaTime;
-	int gameSpeed = 999;	//	Time in ms between loops
+	float deltaTime;	//	Time in ms passed between loops
+	short GameSpeed;	//	Game speed from 1 to 5
+	int gameSpeed = 999;	//	Freeze time in ms between loops
 
-	int day;
+	int day;	//	Global day counter
 
 	//	Main game loop, takes 1 second
 	void GameLoop();

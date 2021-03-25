@@ -11,7 +11,7 @@ int Settlement::SettNum = 0;
 Settlement::Settlement()
 {
 	//	Identifying this settlement
-	//name = "Cornwall";	//	SetName() is needed !HARDCODED FOR NOW!
+	//name[32] = "Cornwall\0";	//	SetName() is needed !HARDCODED FOR NOW!
 	type = 0;	//	Village type !HARDCODED FOR NOW!
 	daysExist = 0;
 	PopProgress = 0.0f;
@@ -558,7 +558,7 @@ void Settlement::Update()
 
 void Settlement::CoutSett()
 {
-	cout << /*name <<*/ " has ID: " << ID << "\t And exists for: " << daysExist << " days" << endl;
+	cout << name << " has ID: " << ID << "\t And exists for: " << daysExist << " days" << endl;
 	cout << "Population: " << population << "\tFree " << freePop << endl;
 	cout << "Food: " << CalculateFood();
 		if (isStarving)
