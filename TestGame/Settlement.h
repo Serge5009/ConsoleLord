@@ -74,7 +74,8 @@ private:
 		void GrowPop();
 	//float PopProgress;	//	Progress of population growth/decline
 
-		void AssignStartingStats();
+		void AssignEnviromentStats();
+		void AssignClimateStats();
 	
 
 public:

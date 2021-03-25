@@ -25,7 +25,7 @@ Settlement::Settlement()
 	DefaultFoodMultiplier();
 	DefaultFoodDaily();
 
-	AssignStartingStats();	//	Assigns settlement stats depending on its climate
+	AssignEnviromentStats();//	Assigns settlement stats depending on its enviroment
 							//	More at function definition
 	void AvoidNegativeFood();
 	void AvoidNegativeResources();
@@ -46,7 +46,7 @@ Settlement::Settlement()
 //	This functions assigns starting resources and bonuses depending on 
 //	enviroment type. Also assigns climate type.
 //	It goes through all possible variants.
-void Settlement::AssignStartingStats()
+void Settlement::AssignEnviromentStats()
 {
 	switch (enviromentType)	//	UNFINISHED
 	{
@@ -263,6 +263,12 @@ void Settlement::AssignStartingStats()
 
 	default:	//	Should not be activated
 		GiveDefaultResources();
+		DefaultResourcesMultiplier();
+		DefaultResourcesDaily();
+		DefaultFoodMultiplier();
+		DefaultFoodDaily();
+		GiveDefaultFood();
+		
 		climateType = NORMAL;
 
 		//	Debug
@@ -273,6 +279,87 @@ void Settlement::AssignStartingStats()
 	}
 
 
+}
+
+void Settlement::AssignClimateStats()
+{
+	switch (climateType)
+	{
+	case VERY_COLD:
+		money += 100;	//	Bonus
+		for(int i = 0; i < FOOD_TYPES_TOTAL; i++)	//	No food where it's cold
+		{FoodMultiplier[i] -= 0.2f;}
+		FoodMultiplier[FISH] += 0.5f;	//	Fishing and hunting is the only way to survive
+		FoodMultiplier[MEAT] += 0.5f;
+
+		ResourcesDailyChange[WOOD] -= 10;	//	You need some wood to make fire
+		ResourcesMultiplier[WOOD] += 0.5f;	//	So people collect more of it
+
+		break;
+
+	case COLD:
+		money += 50;	//	Bonus
+		for (int i = 0; i < FOOD_TYPES_TOTAL; i++)	//	No food where it's cold
+		{FoodMultiplier[i] -= 0.1f;}
+		FoodMultiplier[FRUITS] -= 0.5f;
+		FoodMultiplier[FISH] += 0.3f;	//	Fishing and hunting is the only way to survive
+		FoodMultiplier[MEAT] += 0.3f;
+		FoodMultiplier[MUSHROOMS] += 0.5f;
+		Food[MUSHROOMS] += 50;	//	Yay! Mushroom time!
+
+
+
+		ResourcesDailyChange[WOOD] -= 5;	//	You need some wood to make fire
+		ResourcesMultiplier[WOOD] += 0.3f;	//	So people collect more of it
+
+		break;
+
+	case NORMAL:
+		FoodMultiplier[BREAD] += 0.5f;
+		FoodMultiplier[VEGETABLES] += 0.3f;
+		FoodMultiplier[BERRIES] += 0.5f;
+
+		BuildCost -= 0.1f;
+
+		break;
+
+	case HOT:
+		money += 50;	//	Bonus
+		for (int i = 0; i < FOOD_TYPES_TOTAL; i++)	//	No food where it's hot
+		{FoodMultiplier[i] -= 0.1f;}
+		FoodMultiplier[MUSHROOMS] -= 0.5f;
+		FoodMultiplier[FISH] -= 0.3f;
+		FoodMultiplier[VEGETABLES] -= 0.2f;
+
+		FoodMultiplier[FRUITS] += 0.5f;
+		FoodDailyChange[FRUITS] += 5;
+
+		ResourcesMultiplier[WOOD] -= 0.3f;
+
+		break;
+
+	case VERY_HOT:
+		money += 100;	//	Bonus
+		for (int i = 0; i < FOOD_TYPES_TOTAL; i++)	//	No food where it's hot
+		{
+			FoodMultiplier[i] -= 0.2f;
+		}
+		FoodMultiplier[MUSHROOMS] -= 0.5f;
+
+		FoodMultiplier[FRUITS] += 0.5f;
+		FoodDailyChange[FRUITS] += 5;
+
+		ResourcesMultiplier[WOOD] -= 0.5f;
+
+		break;
+
+	default:
+		//	Debug
+		cout << "No climate with ID " << climateType << " found!!!" << endl;
+		cout << "Setting all settlement " << ID << " to defaults" << endl;
+		SDL_Delay(10000);	//	Freeze for 10 sec
+		break;
+	}
 }
 
 //	This function assigns random resources amount for everything
