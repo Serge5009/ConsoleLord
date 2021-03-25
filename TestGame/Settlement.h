@@ -43,7 +43,6 @@ private:
 
 		//	Resources
 	int population, money;
-	int freePop;
 
 	int Resources[RESOURCES_TYPES_TOTAL];	//	Array with all resources types
 	void GiveDefaultResources();
@@ -66,25 +65,33 @@ private:
 		void GiveDefaultFood();
 		void AvoidNegativeFood();
 	int FoodMultiplier[FOOD_TYPES_TOTAL];
+	//string FoodName[FOOD_TYPES_TOTAL] = { "Bread", "Fish", "Berries", "Mushrooms", "Vegetables", "Fruits", "Meat" };
 		void DefaultFoodMultiplier();
 	int FoodDailyChange[FOOD_TYPES_TOTAL];
 		void DefaultFoodDaily();
 	short primaryFoodType;	//	Depends on enviroment. It's a food type collected by idle people
 
 		void GrowPop();
-	//float PopProgress;	//	Progress of population growth/decline
+	float PopProgress;	//	Progress of population growth/decline
+	int freePop;
+	int requiredPop;
+		int CalculateFreePop();
 
 		void AssignEnviromentStats();
 		void AssignClimateStats();
 	
 
 public:
+	//string name;
 	short ID;
+	short GlobalID;
 	short type;
 
 
 	Settlement();
 	void Update();
 	void CoutSett();
+
+	static int SettNum;
 };
 

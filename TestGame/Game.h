@@ -1,15 +1,18 @@
 #pragma once
 
-#include "Settlement.h"
 #include<cstdlib>
 #include<ctime>
+#include "Player.h"
 
 class Game
 {
 private:
 	bool isRunning;
+	bool isPlaying;	//	If false - freezes updates
 	float deltaTime;
 	int gameSpeed = 999;	//	Time in ms between loops
+
+	int day;
 
 	//	Main game loop, takes 1 second
 	void GameLoop();
@@ -23,12 +26,14 @@ public:
 	//	Destructor
 	~Game();
 
+	Player player;
+
 	//	Starts Game
 	void Start();
 	//	Stop Game
 	void Stop() { isRunning = false; }
 	
-	Settlement* PlayerSett = new Settlement[1];
+	
 	int SettAmount = 0;
 };
 

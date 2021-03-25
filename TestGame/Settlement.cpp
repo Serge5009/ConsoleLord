@@ -6,12 +6,21 @@
 
 using namespace std;
 
+int Settlement::SettNum = 0;
+
 Settlement::Settlement()
 {
 	//	Identifying this settlement
+	//name = "Cornwall";	//	SetName() is needed !HARDCODED FOR NOW!
 	type = 0;	//	Village type !HARDCODED FOR NOW!
 	daysExist = 0;
-	//PopProgress = 0.0f;
+	PopProgress = 0.0f;
+	population = RandomRange(10, 25);
+	requiredPop = 0;
+	freePop = population;
+
+	GlobalID = SettNum;
+	SettNum++;
 
 	//	Creating enviroment
 	enviromentType = RandomRange(0, ENVIROMENT_TYPES_TOTAL - 1);
@@ -27,14 +36,14 @@ Settlement::Settlement()
 
 	AssignEnviromentStats();//	Assigns settlement stats depending on its enviroment
 							//	More at function definition
+	void AssignClimateStats();
 	void AvoidNegativeFood();
 	void AvoidNegativeResources();
 
 
 
 	//	Resources
-	population = RandomRange(10, 25);
-	freePop = population;
+	
 	money = RandomRange(0, 100);
 
 
@@ -106,6 +115,7 @@ void Settlement::AssignEnviromentStats()
 		FoodMultiplier[VEGETABLES] = 0.8f;
 		//	There are some berries
 		Food[BERRIES] += 10;
+		FoodDailyChange[BERRIES] = 3;
 		FoodMultiplier[BERRIES] = 1.3f;
 
 
@@ -225,6 +235,7 @@ void Settlement::AssignEnviromentStats()
 		Food[BREAD] += 10;
 		FoodMultiplier[BREAD] = 1.1f;
 		Food[BERRIES] += 15;
+		FoodDailyChange[BERRIES] = 5;
 		FoodMultiplier[BERRIES] = 1.5f;
 
 		BuildCost = 1.2f;	//	Higher cost
@@ -250,11 +261,12 @@ void Settlement::AssignEnviromentStats()
 		//	WHERE FOOD?!
 		Food[BREAD] -= 20;
 		FoodMultiplier[BREAD] = 0.8f;
-		Food[BERRIES] -= 10;
 		FoodMultiplier[BERRIES] = 0.9f;
+		FoodDailyChange[BERRIES] = 3;	//	Go find something to eat!!
+		FoodDailyChange[MEAT] = 3;
 
 		BuildCost = 1.5f;	//	Higher cost
-		primaryFoodType = ChooseRandom(BERRIES, BREAD);
+		primaryFoodType = ChooseRandom(BERRIES, MEAT);
 
 		break;
 
@@ -377,7 +389,9 @@ void Settlement::AvoidNegativeResources()
 	for (int i = 0; i < RESOURCES_TYPES_TOTAL; i++)
 	{
 		if (Resources[i] < 0)
+		{
 			Resources[i] = 0;
+		}
 	}
 }
 //	Sets all resources mult to 1.0
@@ -413,7 +427,9 @@ void Settlement::AvoidNegativeFood()
 	for (int i = 0; i < FOOD_TYPES_TOTAL; i++)
 	{
 		if (Food[i] < 0)
+		{
 			Food[i] = 0;
+		}
 	}
 }
 //	Sets all food mult to 1.0
@@ -489,24 +505,37 @@ int Settlement::EatFood(int amount)
 }
 
 void Settlement::GrowPop()
-{/*
+{
 	if (isStarving)
 	{
 		PopProgress -= (float)population / 20;
-	}
-	else if (food > population * 5)
+	}	
+	else if (food > population * 10)
 	{
-		float eaten = (float)food - (float)population * 4.5;
+		float eaten = (float)food - (float)population * 9.5;
 		PopProgress += eaten / 100;
-		food -= (int)eaten;
+		EatFood((int)eaten);
 	}
 	else
 	{
 		PopProgress += (float)population / 1000;
 	}
-*/
+
+	if (PopProgress >= 1 || PopProgress <= -1)
+	{
+		if (PopProgress <= -1)
+			Food[MEAT] += (int)PopProgress * 5;
+		population += (int)PopProgress;
+		PopProgress -= (int)PopProgress;
+		// ???
+	}
+
 }
 
+int Settlement::CalculateFreePop()
+{
+	return population - requiredPop;
+}
 
 //	All changes occuring every game loop (day)
 void Settlement::Update()
@@ -523,24 +552,24 @@ void Settlement::Update()
 	food = CalculateFood();
 	foodDiversity = EatFood(population);	//	People need food
 
-
-	if (isStarving)	//	people can die from starvation
-		population -= population / 20 + 1;
+	GrowPop();
+	freePop = CalculateFreePop();
 }
 
 void Settlement::CoutSett()
 {
-	system("CLS");
-	cout << "Settlement ID: " << ID << "\t Exists for: " << daysExist << " days" << endl;
-	cout << "Population: " << population << "\tMoney: " << money << endl;
+	cout << /*name <<*/ " has ID: " << ID << "\t And exists for: " << daysExist << " days" << endl;
+	cout << "Population: " << population << "\tFree " << freePop << endl;
 	cout << "Food: " << CalculateFood();
 		if (isStarving)
 			{cout << "\t\tSettlement is starving!!!";}
+		else 
+			{cout << "\t\tPrimary food type is " << primaryFoodType;}
 		cout << endl;
 	cout << Food[BREAD] << " BRD\t" << Food[FISH] << " FSH\t" << Food[BERRIES] << " BER\t" << Food[MEAT] << " MEA" << endl;
 	cout << Food[MUSHROOMS] << " MRM\t" << Food[VEGETABLES] << " VEG\t" << Food[FRUITS] << " FRT\t" << endl;
 	cout << "There are " << foodDiversity << " types of food available" << endl;
-	//cout << "Population progress: " << PopProgress << endl;
+	cout << "Population progress: " << PopProgress << endl;
 	cout << "Resources" << endl;
 	cout << Resources[WOOD] << " WOD \t" << Resources[STONE] << " STN \t" << Resources[IRON] << " IRN" << endl;
 	cout << Resources[STEEL] << " STL \t" << Resources[CLAY] << " CLY" << endl;

@@ -1,61 +1,59 @@
-﻿  Building.cpp
-  Game.cpp
-D:\Prog\ConsoleLord\TestGame\Game.cpp(80,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Game.cpp(91,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Game.cpp(105,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Main.cpp
+﻿  Game.cpp
+D:\Prog\ConsoleLord\TestGame\Game.cpp(96,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Game.cpp(107,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Game.cpp(119,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Settlement.cpp
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(66,31): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(71,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(83,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(85,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(88,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(104,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(106,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(109,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(114,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(126,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(128,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(129,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(133,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(149,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(151,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(155,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(171,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(173,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(174,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(178,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(193,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(203,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(215,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(226,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(228,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(239,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(252,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(254,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(291,29): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(292,31): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(293,31): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(303,29): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(304,33): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(305,31): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(306,31): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(307,36): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(318,32): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(319,37): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(320,34): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(329,29): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(330,36): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(331,31): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(332,37): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(334,33): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(345,29): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(347,36): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(349,33): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(424,23): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-D:\Prog\ConsoleLord\TestGame\Settlement.cpp(521,67): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-  Timer.cpp
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(74,31): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(79,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(91,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(93,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(96,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(112,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(114,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(118,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(123,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(135,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(137,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(138,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(142,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(158,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(160,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(164,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(180,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(182,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(183,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(187,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(202,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(212,28): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(224,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(235,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(238,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(249,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(262,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(263,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(302,29): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(303,31): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(304,31): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(314,29): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(315,33): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(316,31): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(317,31): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(318,36): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(329,32): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(330,37): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(331,34): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(340,29): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(341,36): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(342,31): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(343,37): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(345,33): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(356,29): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(358,36): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(360,33): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(439,23): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(514,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Prog\ConsoleLord\TestGame\Settlement.cpp(549,67): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
   Generating Code...
-D:\Prog\ConsoleLord\TestGame\Game.cpp(98): warning C4715: 'ChooseRandom': not all control paths return a value
+D:\Prog\ConsoleLord\TestGame\Game.cpp(128): warning C4715: 'ChooseRandom': not all control paths return a value
 D:\Prog\ConsoleLord\TestGame\Game.cpp(114): warning C4715: 'ChooseRandom': not all control paths return a value
   TestGame.vcxproj -> D:\Prog\ConsoleLord\x64\Debug\ConsoleLord.exe
