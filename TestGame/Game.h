@@ -7,24 +7,27 @@
 class Game
 {
 private:
-	bool isRunning;	//	Controls Game loop
-	bool isPlaying;	//	If false - freezes updates
-	float deltaTime;	//	Time in ms passed between loops
-	short GameSpeed;	//	Game speed from 1 to 5
-	int gameSpeed = 999;	//	Freeze time in ms between loops
+	bool isRunning;			//	Controls Game loop
+	bool isPlaying;			//	If false - freezes updates
+	short GameSpeed;		//	Game speed from 1 to 5
+	float deltaTime;		//	Time in ms passed between loops
+	int gameSpeed = 1000;	//	Freeze time in ms between loops
 
 	int day;	//	Global day counter
 
-	//	Main game loop, takes 1 second
-	void GameLoop();
-	void HandleEvents();
-	void Update(float DeltaTime);
-	void Render();
+	void GameLoop();		//	Main game loop
 
+	void HandleEvents();	//	Handles input, called each loop
 
+	void Update();			//	Handles all background actions that occure every day
+							//	called only if isPlaying == true
 
-	void StartingScreen();
-	void HelpScreen();
+	void Render();			//	Renders selected settlement or menu
+			//	For now only outputs main player settlement
+
+	void StartingScreen();	//	Outputs starting screen and handles input
+	void HelpScreen();		//	Outputs help screen and waits for any key being pressed
+
 public:
 	//	Constructor
 	Game();
@@ -38,7 +41,7 @@ public:
 	//	Stop Game
 	void Stop() { isRunning = false; }
 	
-	
+	//	Total amount of settlements exsisting in the game
 	int SettAmount = 0;
 };
 

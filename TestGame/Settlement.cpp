@@ -6,58 +6,58 @@
 
 using namespace std;
 
-int Settlement::SettNum = 0;
+short Settlement::SettNum = 0;	//	Total amount of Settlements exsisting in the game
 
+	//	Constructor
 Settlement::Settlement()
 {
-	//	Identifying this settlement
-	//name[32] = "Cornwall\0";	//	SetName() is needed !HARDCODED FOR NOW!
-	type = 0;	//	Village type !HARDCODED FOR NOW!
-	daysExist = 0;
-	PopProgress = 0.0f;
-	population = RandomRange(10, 25);
+		//	Identifying this settlement:
+	type = 0;			//	Village type !HARDCODED FOR NOW!
+	GlobalID = SettNum;	
+	SettNum++;		//	Adding one to settlement counter
+		
+		//	Settihg defaults:
+	daysExist = 0;		
+	PopProgress = 0.0f;	
+	population = RandomRange(10, 25);	//	Random population
 	requiredPop = 0;
 	freePop = population;
 
-	GlobalID = SettNum;
-	SettNum++;
+	money = RandomRange(0, 100);
 
-	//	Creating enviroment
-	enviromentType = RandomRange(0, ENVIROMENT_TYPES_TOTAL - 1);
-	cout << "Creating enviroment, ID" << enviromentType << endl;
-	GiveDefaultResources();
+	GiveDefaultResources();			
 	DefaultResourcesMultiplier();
 	DefaultResourcesDaily();
-
 	GiveDefaultFood();
-	foodDiversity = 3;
 	DefaultFoodMultiplier();
 	DefaultFoodDaily();
 
-	AssignEnviromentStats();//	Assigns settlement stats depending on its enviroment
+		//	Creating enviroment:
+	enviromentType = RandomRange(0, ENVIROMENT_TYPES_TOTAL - 1);	//	One of exsisting enviroment types
+
+	AssignEnviromentStats();//	Assigns settlement stats and cliamte depending on its enviroment
 							//	More at function definition
-	void AssignClimateStats();
-	void AvoidNegativeFood();
-	void AvoidNegativeResources();
 
+	AssignClimateStats();	//	Assign settlement stats depending on its climate
 
+	AvoidNegativeFood();		//	Checking for negatives
+	AvoidNegativeResources();	
 
-	//	Resources
-	
-	money = RandomRange(0, 100);
-
-
-
-	
+	//	Here will be code that creates 1-3 buildings
 }
 
+	//	Destructor
+Settlement::~Settlement()
+{
+
+}
 
 //	This functions assigns starting resources and bonuses depending on 
 //	enviroment type. Also assigns climate type.
 //	It goes through all possible variants.
 void Settlement::AssignEnviromentStats()
 {
-	switch (enviromentType)	//	UNFINISHED
+	switch (enviromentType)
 	{
 	case FOREST:
 		climateType = RandomRange(VERY_COLD, NORMAL);
@@ -97,7 +97,7 @@ void Settlement::AssignEnviromentStats()
 		FoodMultiplier[BERRIES] = 2.0f;
 
 		BuildCost = 0.5f;	//	Perfect for building
-		primaryFoodType = ChooseRandom(BERRIES, BREAD);
+		primaryFoodType = ChooseRandom(BERRIES, BREAD, BERRIES);
 
 		break;
 	case STEPPE:
@@ -293,6 +293,8 @@ void Settlement::AssignEnviromentStats()
 
 }
 
+//	Adds or removes stats depending on climate type
+//	called right after AssignEnviromentStats() so climate type is already known
 void Settlement::AssignClimateStats()
 {
 	switch (climateType)
@@ -374,7 +376,7 @@ void Settlement::AssignClimateStats()
 	}
 }
 
-//	This function assigns random resources amount for everything
+//	This function assigns random resources amount for all types
 void Settlement::GiveDefaultResources()
 {
 	for (int i = 0; i < RESOURCES_TYPES_TOTAL; i++)
@@ -382,7 +384,6 @@ void Settlement::GiveDefaultResources()
 		Resources[i] = RandomRange(10, 50);
 	}
 }
-
 //	Just checks for negatives and assigns 0
 void Settlement::AvoidNegativeResources()
 {
@@ -410,8 +411,7 @@ void Settlement::DefaultResourcesDaily()
 		ResourcesDailyChange[i] = 0;
 	}
 } 
-
-
+//	This function assigns random food amount for all types
 void Settlement::GiveDefaultFood()
 {
 	for (int i = 0; i < FOOD_TYPES_TOTAL; i++)
@@ -420,7 +420,6 @@ void Settlement::GiveDefaultFood()
 	}
 	primaryFoodType = BREAD;
 }
-
 //	Just checks for negatives and assigns 0
 void Settlement::AvoidNegativeFood()
 {
@@ -454,40 +453,45 @@ int Settlement::CalculateFood()
 {
 	int foodSum = 0;
 	for (int i = 0; i < FOOD_TYPES_TOTAL; i++)
-	{
+	{	//	loops through all types
 		foodSum += Food[i];
 	}
 	return foodSum;
 }
 
 //	Allows people to eat different types of food
-//	Also defines food diversity
+//	returns food diversity
 int Settlement::EatFood(int amount)
 {
-	if (food < amount)
+	if (food < amount)		//	Checking is there enough food
 	{isStarving = true;}
 	else
 	{isStarving = false;}
-	int eaten = 0;	//	How much food was already eaten
+
+	//	We will loop throug all food types once and (if possible) take some amount of each type
+	//	Each successfuly eaten portion of food adds 1 to available types (returned value)
+	//	and adds amount of eaten food to "eaten" variable
+	//	Than we will make the same loop (but without increasing food variety) until "eaten" will
+	//	reach amount of food needed to be eaten
+	
+	int eaten = 0;				//	How much food was already eaten
 	int portion = amount / FOOD_TYPES_TOTAL;	//	Size of one portion of a food type
-	short types = 0;	//	Food variety
+	short types = 0;			//	Food variety (this value will be returned)
 	
 	for (int i = 0; i < FOOD_TYPES_TOTAL; i++)	//	Loops through all food types;
 	{	//	This is the first loop through all food types; it allows to apply variety bonus
 		if (Food[i] >= portion)
-		{
+		{		//	Takes portion of food if can to do it
 			Food[i] -= portion;
-			eaten += portion;
-			//if (isFirstTimeEaten[i])
-			types++;
-			//isFirstTimeEaten[i] = false;
+			eaten += portion;	//	Adds to eaten
+			types++;			//	Adds one more type
 		}
 	}	//	If all types of food are available, next loop will not be activated
 
-	int loops = 0;
+	int loops = 0;	//	Should save us from endless loop
 	while (amount > eaten && loops < 100)
 	{	//	This loop allows to eat existing food insted of missed one
-		loops++;	//	this should save us from stucking in this loop
+		loops++;
 		portion = (amount - eaten) / FOOD_TYPES_TOTAL;	// new portion size
 		if (portion < 1)	//	Minimal portion size is 1
 			portion = 1;	//	to avoid endless loops
@@ -500,12 +504,17 @@ int Settlement::EatFood(int amount)
 				eaten += portion;
 			}
 		}
+		//	DEBUG
+		if (loops == 99)
+		{cout << "DEBUG! EatFood() loop reached 99!\nshould not appear" << endl; SDL_Delay(1000);}
 	}
+	AvoidNegativeFood();
 	return types;
 }
 
+//	Handles growth and decline of population
 void Settlement::GrowPop()
-{
+{		//	New function needed
 	if (isStarving)
 	{
 		PopProgress -= (float)population / 20;
@@ -529,35 +538,30 @@ void Settlement::GrowPop()
 		PopProgress -= (int)PopProgress;
 		// ???
 	}
-
 }
 
-int Settlement::CalculateFreePop()
-{
-	return population - requiredPop;
-}
-
-//	All changes occuring every game loop (day)
+//	All changes that happen every game loop (day)
 void Settlement::Update()
 {
 	daysExist++;	//	Another day...
 
-	for (int i = 0; i < FOOD_TYPES_TOTAL; i++)	//	Adds food
+	for (int i = 0; i < FOOD_TYPES_TOTAL; i++)	//	Adds food of each type
 	{Food[i] += FoodDailyChange[i] * FoodMultiplier[i];}
 	Food[primaryFoodType] += (freePop / 2) * FoodMultiplier[primaryFoodType];	//	Adds primary food
 
-	for (int i = 0; i < RESOURCES_TYPES_TOTAL; i++)	//	Adds resources
+	for (int i = 0; i < RESOURCES_TYPES_TOTAL; i++)	//	Adds resources of each type
 	{Resources[i] += ResourcesDailyChange[i] * ResourcesMultiplier[i];}
 
-	food = CalculateFood();
+	food = CalculateFood();			//	Sums up all food
 	foodDiversity = EatFood(population);	//	People need food
 
-	GrowPop();
-	freePop = CalculateFreePop();
+	GrowPop();	//	Changes value of PopProgress depending on food of available
+	freePop = CalculateFreePop();	//	Calculetes amount of idle population
 }
 
+	//	Outputs settlement stats to console
 void Settlement::CoutSett()
-{
+{	//	New function needed
 	cout << name << " has ID: " << ID << "\t And exists for: " << daysExist << " days" << endl;
 	cout << "Population: " << population << "\tFree " << freePop << endl;
 	cout << "Food: " << CalculateFood();
@@ -574,7 +578,7 @@ void Settlement::CoutSett()
 	cout << Resources[WOOD] << " WOD \t" << Resources[STONE] << " STN \t" << Resources[IRON] << " IRN" << endl;
 	cout << Resources[STEEL] << " STL \t" << Resources[CLAY] << " CLY" << endl;
 
-	cout << "Climate is ";
+	cout << "Climate is ";	//	Switch will be changed to string array in future
 	switch (climateType)
 	{
 	case VERY_COLD:
@@ -596,7 +600,7 @@ void Settlement::CoutSett()
 		cout << "Error! ID" << climateType << " is not found!";
 		break;
 	}
-	cout << "\t\tLocation: ";
+	cout << "\t\tLocation: ";	//	Switch will be changed to string array in future
 	switch (enviromentType)
 	{
 	case FOREST:
@@ -631,9 +635,5 @@ void Settlement::CoutSett()
 		break;
 	}
 	cout << endl;
-
 	cout << endl;
-
-
-	//SDL_Delay(2000);
 }

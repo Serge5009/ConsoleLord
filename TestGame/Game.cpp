@@ -9,13 +9,8 @@ using namespace std;
 
 Game::Game()
 {
-	StartingScreen();
-	isRunning = true;
-	isPlaying = true;
-	GameSpeed = 3;
-	deltaTime = 1.0;
-	
-	day = 0;
+	StartingScreen();	//	Calling the starting screen
+
 }
 
 Game::~Game()
@@ -26,31 +21,36 @@ Game::~Game()
 
 void Game::Start()
 {
-	HelpScreen();
+	isRunning = true;	//	Activate main game loop
+	isPlaying = true;	//	Unpause
 
-	isRunning = true;
-	
-	GameLoop();
-	
+	GameSpeed = 3;		//	Set game speed to normal
+
+	day = 0;			//	We start with day 0
+
+	GameLoop();			//	Enters the game loop
 }
 
 void Game::GameLoop()
 {
-	Timer deltaTimer;
-	deltaTimer.Start();
+	Timer deltaTimer;	//	Creates a timer to control time between updates
+	deltaTimer.Start();	//	We will use it later to adjust int gameSpeed
 
 	while (isRunning)
 	{
-		HandleEvents();
+		HandleEvents();	//	Event handler (input)
 
-		if(isPlaying)
-		Update(deltaTime);
+		if(isPlaying)		//	This function contains all actions happening in the game
+		Update();	//	If game is paused we won't call it
+							//	But input and render will still be called
 
+							//	Assigns time that passed between loops to variable
 		deltaTime = static_cast<float>(deltaTimer.GetTicks()) / 1000.0f;
-		deltaTimer.Start();
+		deltaTimer.Start();	//	Starts timer again
 		
-		Render();
+		Render();			//	Renders selected settlement or menu
 
+							//	Assigns proper freeze time in ms according to selected speed
 		switch (GameSpeed)
 		{
 		case 1:
@@ -71,16 +71,18 @@ void Game::GameLoop()
 		default:
 			break;
 		}
+							//	Freezes loop
 		SDL_Delay(gameSpeed);
 	}
-
 }
-	//	Pause doesn't work
+
+	//	Input handler
 void Game::HandleEvents()
-{
-	while (_kbhit())
+{	
+	while (_kbhit())		//	Ignores the loop if no keys were pressed
 	{
-		int key = _getch();
+		int key = _getch();	//	Assigns ID of entered symbol to key variable
+		//	Goes through all possible keys
 		if (key == ' ') {	//	SPACE for pause/unpause
 			isPlaying = !isPlaying;
 		}
@@ -95,53 +97,60 @@ void Game::HandleEvents()
 				GameSpeed = 1;
 		}
 	}
-	
 }
 
-void Game::Update(float DeltaTime)
+void Game::Update()
 { 
-	player.Update();
+	player.Update();	//	Calls player's function that handles update
 
-	day++;
+	//	here will be the loop that calls .Update() for all AI
+
+	day++;		//	Add one day to counter
 }
 
 void Game::Render()
 {
-	system("CLS");
+	system("CLS");		//	Clear the screen
+						//	Renders top bar
 	cout << "\tMoney " << player.money << "\t\t\tDay " << day;
-	if (isPlaying)
+	if (isPlaying)	//	Outputs speed
 		cout << "\t\t\tSpeed " << GameSpeed;
-	else
+	else			//	or "PAUSED" if game is paused
 		cout << "\t\t\tPAUSED";
 	cout << endl;
-	player.RenderSett(0);
-	cout << "\n\n\ndeltaTime: " << deltaTime << endl;
+
+		//	Here will be the code to render the selected menu or settlement
+	player.RenderSett(0);		//	For now it renders main player settlement
+	cout << "\n\n\ndeltaTime: " << deltaTime << endl;	//	DEBUG	//	Outputs time between loops
 }
 
 
-//	Outputs starting screen and handles input
+	//	Outputs starting screen and handles input
 void Game::StartingScreen()
 {
 	bool startLoop = true;		//	Loop control
-	bool isYesChoosen = true;	//	Selected option
+	bool isYesSelected = true;	//	Selected option
 	while (startLoop)
 	{
-		system("CLS");
+		system("CLS");	//	Clear screen
 		cout << "\n\n\n\n\n\n\n";
 		cout << "\t\t\t\t\t   Welcome to Console Lord" << endl << endl << endl;
 		cout << "\t\t\t\t\t    Wanna start the game?" << endl << endl;
 		cout << "\t\t\t\t\t\t";
-		if (isYesChoosen)
+
+		//	Highlites selected option
+		if (isYesSelected)
 			cout << "\033[102m";	//	make BG Green
 		cout << "Yes";
-		if (isYesChoosen)
-			cout << "\033[40m";	//	restore BG color
+		if (isYesSelected)
+			cout << "\033[40m";		//	restore BG color
 		cout << "\t";
-		if (!isYesChoosen)
+		if (!isYesSelected)
 			cout << "\033[102m";	//	make BG Green
 		cout << "No" << endl;
-		if (!isYesChoosen)
-			cout << "\033[40m";	//	restore BG color
+		if (!isYesSelected)
+			cout << "\033[40m";		//	restore BG color
+
 		cout << "\n\n\n\n\n";
 		cout << "\tUse 'a' and 's' to navigate," << endl;
 		cout << "\tUse 'd', SPACE or ENTER to select." << endl;
@@ -150,10 +159,10 @@ void Game::StartingScreen()
 		{
 			int key = _getch();
 			if (key == 'a') {	//	a for left
-				isYesChoosen = true;
+				isYesSelected = true;
 			}
 			if (key == 'd') {	//	d for right
-				isYesChoosen = false;
+				isYesSelected = false;
 			}
 			if (key == ' ') {	//	SPACE to proceed
 				startLoop = false;
@@ -166,22 +175,25 @@ void Game::StartingScreen()
 			}
 		}
 
-		SDL_Delay(100);
+		SDL_Delay(100);	//	Slow down render of the screen
 	}
-	if (isYesChoosen)
+	if (isYesSelected)	//	Was yes pressed?
 	{
-		Start();
+		HelpScreen();	//	Show info & controls 
+		Start();		//	Start the game
 	}
-	else
+	else				//	User doesn't want to play our game( 
 	{
 		cout << "\n\n\nC'ya later, stranger!" << endl;
-		Stop();
+		Stop();			//	This will avoid entering the main game loop
 	}
 }
 
+	//	Outputs help screen and freezes game until any key is pressed
 void Game::HelpScreen()
 {
 	system("CLS");	//	Clear screen
+
 	cout << "\n\n";	//	Output content
 	cout << "\tConsole Lord is a strategy game, where you have to manage one or more" << endl;
 	cout << "\tsettlement's that you own. Each of them have their peculiar properties" << endl;
@@ -194,11 +206,16 @@ void Game::HelpScreen()
 	cout << "\tSPACE for pause/unpause" << endl;
 	cout << "\t+ to speed up / - to slow down" << endl << endl << endl;
 	cout << "\t\tpress any key to proceed" << endl;
+
 	while (!_kbhit()) {}	//	Waiting for any input
 }
 
 
-	//	Global random functions
+
+
+			//	Global random functions
+
+	//	Returns nubmer between min and max
 int RandomRange(int min, int max)
 {
 	if (isFirstTimeSeed)
@@ -210,6 +227,7 @@ int RandomRange(int min, int max)
 	return (rand() % (max - min + 1)) + min;
 }
 
+	//	Returns one of two inputed values
 int ChooseRandom(int one, int two)
 {
 	if (isFirstTimeSeed)
@@ -222,6 +240,7 @@ int ChooseRandom(int one, int two)
 	if (rand() % 2 == 1)
 		return two;
 }
+	//	(overloaded) Returns one of three inputed values
 int ChooseRandom(int one, int two, int three)
 {
 	if (isFirstTimeSeed)
