@@ -21,6 +21,10 @@ private:
 	void Update(float DeltaTime);
 	void Render();
 
+
+
+	void StartingScreen();
+	void HelpScreen();
 public:
 	//	Constructor
 	Game();

@@ -9,6 +9,7 @@ using namespace std;
 
 Game::Game()
 {
+	StartingScreen();
 	isRunning = true;
 	isPlaying = true;
 	GameSpeed = 3;
@@ -25,6 +26,8 @@ Game::~Game()
 
 void Game::Start()
 {
+	HelpScreen();
+
 	isRunning = true;
 	
 	GameLoop();
@@ -113,6 +116,85 @@ void Game::Render()
 	cout << endl;
 	player.RenderSett(0);
 	cout << "\n\n\ndeltaTime: " << deltaTime << endl;
+}
+
+
+//	Outputs starting screen and handles input
+void Game::StartingScreen()
+{
+	bool startLoop = true;		//	Loop control
+	bool isYesChoosen = true;	//	Selected option
+	while (startLoop)
+	{
+		system("CLS");
+		cout << "\n\n\n\n\n\n\n";
+		cout << "\t\t\t\t\t   Welcome to Console Lord" << endl << endl << endl;
+		cout << "\t\t\t\t\t    Wanna start the game?" << endl << endl;
+		cout << "\t\t\t\t\t\t";
+		if (isYesChoosen)
+			cout << "\033[102m";	//	make BG Green
+		cout << "Yes";
+		if (isYesChoosen)
+			cout << "\033[40m";	//	restore BG color
+		cout << "\t";
+		if (!isYesChoosen)
+			cout << "\033[102m";	//	make BG Green
+		cout << "No" << endl;
+		if (!isYesChoosen)
+			cout << "\033[40m";	//	restore BG color
+		cout << "\n\n\n\n\n";
+		cout << "\tUse 'a' and 's' to navigate," << endl;
+		cout << "\tUse 'd', SPACE or ENTER to select." << endl;
+		
+		while (_kbhit())	//	Simple input system
+		{
+			int key = _getch();
+			if (key == 'a') {	//	a for left
+				isYesChoosen = true;
+			}
+			if (key == 'd') {	//	d for right
+				isYesChoosen = false;
+			}
+			if (key == ' ') {	//	SPACE to proceed
+				startLoop = false;
+			}
+			if (key == 'e') {	//	e to proceed
+				startLoop = false;
+			}
+			if (key == '\r') {	//	ENTER to proceed
+				startLoop = false;
+			}
+		}
+
+		SDL_Delay(100);
+	}
+	if (isYesChoosen)
+	{
+		Start();
+	}
+	else
+	{
+		cout << "\n\n\nC'ya later, stranger!" << endl;
+		Stop();
+	}
+}
+
+void Game::HelpScreen()
+{
+	system("CLS");	//	Clear screen
+	cout << "\n\n";	//	Output content
+	cout << "\tConsole Lord is a strategy game, where you have to manage one or more" << endl;
+	cout << "\tsettlement's that you own. Each of them have their peculiar properties" << endl;
+	cout << "\tthat define their strong and week sides. Build proper buildings and maintain" << endl;
+	cout << "\ttrade routes to make your kingdom grow!" << endl << endl;
+	cout << "\tGather your troops to fight your enemies and expand your territory!" << endl << endl << endl;
+	cout << "Controls:" << endl;
+	cout << "\tWASD for navigation" << endl;
+	cout << "\t'e' or ENTER for selection" << endl;
+	cout << "\tSPACE for pause/unpause" << endl;
+	cout << "\t+ to speed up / - to slow down" << endl << endl << endl;
+	cout << "\t\tpress any key to proceed" << endl;
+	while (!_kbhit()) {}	//	Waiting for any input
 }
 
 
