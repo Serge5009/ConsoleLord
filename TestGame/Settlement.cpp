@@ -21,6 +21,7 @@ Settlement::Settlement()
 	PopProgress = 0.0f;	
 	population = RandomRange(10, 25);	//	Random population
 	requiredPop = 0;
+	foodDiversity = 0;
 	freePop = population;
 
 	money = RandomRange(0, 100);
@@ -568,38 +569,33 @@ void Settlement::CoutSett()
 		if (isStarving)
 			{cout << "\t\tSettlement is starving!!!";}
 		else 
-			{cout << "\t\tPrimary food type is " << primaryFoodType;}
+			{cout << "\t\tPrimary food type is " << foodNames[primaryFoodType];}
 		cout << endl;
-	cout << Food[BREAD] << " BRD\t" << Food[FISH] << " FSH\t" << Food[BERRIES] << " BER\t" << Food[MEAT] << " MEA" << endl;
-	cout << Food[MUSHROOMS] << " MRM\t" << Food[VEGETABLES] << " VEG\t" << Food[FRUITS] << " FRT\t" << endl;
-	cout << "There are " << foodDiversity << " types of food available" << endl;
-	cout << "Population progress: " << PopProgress << endl;
-	cout << "Resources" << endl;
-	cout << Resources[WOOD] << " WOD \t" << Resources[STONE] << " STN \t" << Resources[IRON] << " IRN" << endl;
-	cout << Resources[STEEL] << " STL \t" << Resources[CLAY] << " CLY" << endl;
 
-	cout << "Climate is ";	//	Switch will be changed to string array in future
-	switch (climateType)
+		for (int i = 0; i < FOOD_TYPES_TOTAL; i++)	//	Looping throug all resources types
+		{
+			if (i == FOOD_TYPES_TOTAL / 2)
+				cout << endl;	//	Deviding resources for 2 lines
+
+			cout << Food[i] << " " << foodNames[i] << "\t";	//	Outputs amount and name of resource
+
+		}		cout << endl;	//	endl after all resources are outputed
+
+	cout << "There are " << foodDiversity << " types of food available" << endl;
+	cout << "Population progress: " << PopProgress << endl << endl;
+	cout << "Resources" << endl;
+	for (int i = 0; i < RESOURCES_TYPES_TOTAL; i++)	//	Looping throug all resources types
 	{
-	case VERY_COLD:
-		cout << "very cold!";
-		break;
-	case COLD:
-		cout << "cold.";
-		break;
-	case NORMAL:
-		cout << "perfect!";
-		break;
-	case HOT:
-		cout << "hot.";
-		break;
-	case VERY_HOT:
-		cout << "very hot!";
-		break;
-	default:	//	Debug
-		cout << "Error! ID" << climateType << " is not found!";
-		break;
-	}
+		if (i == RESOURCES_TYPES_TOTAL / 2)
+			cout << endl;	//	Deviding resources for 2 lines
+
+		cout << Resources[i] << " " << resourcesNames[i] << "\t";	//	Outputs amount and name of resource
+		
+	}		cout << endl << endl;	//	endl after all resources are outputed
+
+
+	cout << "Climate is " << climateNames[climateType];	
+	
 	cout << "\t\tLocation: ";	//	Switch will be changed to string array in future
 	switch (enviromentType)
 	{

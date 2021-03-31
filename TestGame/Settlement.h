@@ -12,22 +12,33 @@
 //	Enums for extandable arrays of resources, food & climate
 enum RESOURCES
 {
-	WOOD, STONE, IRON, STEEL, CLAY,
+	WOOD, STONE, IRON, STEEL, COAL, CLAY, FUR, WOOL,
 
 	RESOURCES_TYPES_TOTAL
 };
+const char resourcesNames[RESOURCES_TYPES_TOTAL][8] = { 
+	"Wood  ", "Stone ", "Iron  ", "Stell ", "Coal  ", "Clay  ", "Fur   ", "Wool  " };	//	All names are same size (I use spaces to make them equal)
+
 enum FOOD
 {
-	BREAD, FISH, BERRIES, MUSHROOMS, VEGETABLES, FRUITS, MEAT,
+	BREAD, VEGETABLES, FRUITS, BERRIES, MUSHROOMS, FISH, MEAT, DAIRY,
 
 	FOOD_TYPES_TOTAL
 };
+const char foodNames[FOOD_TYPES_TOTAL][16] = { 
+	"Bread    ", "Vegetable", "Fruits   ", "Berries  ", "Mushrooms", "Fish     ", "Meat     ", "Dairy    " };	//	All names are same size (I use spaces to make them equal)
+
+
 enum CLIMATE_TYPE
 {
 	VERY_COLD, COLD, NORMAL, HOT, VERY_HOT,
 
 	CLIMATE_TYPES_TOTAL
 };
+const char climateNames[CLIMATE_TYPES_TOTAL][32] = {
+	"\033[34mVery cold\033[37m", "\033[36mCold     \033[37m", "\033[32mPerfect  \033[37m", "\033[33mHot      \033[37m", "\033[31mVery hot \033[37m"};	//	All names are same size (I use spaces to make them equal)
+
+
 enum ENVIROMENT_TYPE
 {
 	FOREST, PLAIN, STEPPE, RIVER_DELTA, RIVER_BANK, SEA_SHORE, DESERT_OASIS, 
